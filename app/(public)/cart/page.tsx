@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/components/language-context';
+import { colorLabel, printAreaLabel } from '@/lib/catalog-labels';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { FadeIn } from '@/components/ui/animate';
@@ -41,7 +42,7 @@ export default function CartPage() {
   const total = subtotal + shipping;
 
   if (!session?.user) {
-    return (<div className="py-20 text-center"><ShoppingCart className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground mb-4">{lang === 'sq' ? 'Hyr në llogarinë për të parë shportën.' : 'Log in to view your cart.'}</p><Link href="/login"><Button>{t('nav.login')}</Button></Link></div>);
+    return (<div className="py-20 text-center"><ShoppingCart className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground mb-4">{lang === 'sq' ? 'Hyr në llogari për të parë shportën.' : 'Log in to view your cart.'}</p><Link href="/login"><Button>{t('nav.login')}</Button></Link></div>);
   }
 
   return (
@@ -62,7 +63,7 @@ export default function CartPage() {
                     <div className="relative w-20 h-20 rounded bg-muted flex-shrink-0"><Image src={item?.product?.imageUrl ?? '/images/portfolio-gallery.png'} alt={item?.product?.name ?? ''} fill className="object-cover rounded" /></div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold truncate">{lang === 'sq' ? (item?.product?.nameAl ?? item?.product?.name) : (item?.product?.name ?? '')}</h3>
-                      <p className="text-sm text-muted-foreground">{[item?.size, item?.color, item?.printArea].filter(Boolean).join(' • ')}</p>
+                      <p className="text-sm text-muted-foreground">{[item?.size, colorLabel(item?.color, lang), printAreaLabel(item?.printArea, lang)].filter(Boolean).join(' • ')}</p>
                       <p className="font-bold text-primary mt-1">{item?.product?.basePrice ?? 0} {t('common.lek')}</p>
                     </div>
                     <div className="flex flex-col items-end gap-2">
@@ -89,7 +90,7 @@ export default function CartPage() {
                   <Link href="/checkout" className="block mt-4">
                     <Button className="w-full">{t('cart.checkout')} <ArrowRight className="ml-2 h-4 w-4" /></Button>
                   </Link>
-                  {shipping > 0 && <p className="text-xs text-muted-foreground mt-2 text-center">{lang === 'sq' ? 'Transport falas mbi 5,000 Lekë' : 'Free shipping over 5,000 ALL'}</p>}
+                  {shipping > 0 && <p className="text-xs text-muted-foreground mt-2 text-center">{lang === 'sq' ? 'Transport falas mbi 5.000 Lekë' : 'Free shipping over 5,000 ALL'}</p>}
                 </CardContent>
               </Card>
             </div>

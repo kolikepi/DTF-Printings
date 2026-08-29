@@ -18,18 +18,18 @@ export default function OrderConfirmationPage() {
         <FadeIn>
           <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
           <h1 className="font-display text-3xl font-bold tracking-tight mb-2">
-            {lang === 'sq' ? 'Porosia u Bë me Sukses!' : 'Order Placed Successfully!'}
+            {lang === 'sq' ? 'Porosia u krye me sukses!' : 'Order Placed Successfully!'}
           </h1>
           {orderNumber && (
             <p className="text-lg text-muted-foreground mb-2">
-              {lang === 'sq' ? 'Numri i porosie:' : 'Order number:'} <strong className="text-foreground">{orderNumber}</strong>
+              {lang === 'sq' ? 'Numri i porosisë:' : 'Order number:'} <strong className="text-foreground">{orderNumber}</strong>
             </p>
           )}
           <p className="text-muted-foreground mb-8">
-            {lang === 'sq' ? 'Do tju kontaktojmë për konfirmimin e porosie. Faleminderit!' : 'We will contact you for order confirmation. Thank you!'}
+            {lang === 'sq' ? 'Do t’ju kontaktojmë për të konfirmuar porosinë. Faleminderit!' : 'We will contact you for order confirmation. Thank you!'}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/account/orders"><Button variant="outline"><Package className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Shiko Porositë' : 'View Orders'}</Button></Link>
+            <Link href="/account/orders"><Button variant="outline"><Package className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Shiko porositë' : 'View Orders'}</Button></Link>
             <Link href="/"><Button><Home className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Kryefaqja' : 'Home'}</Button></Link>
           </div>
         </FadeIn>

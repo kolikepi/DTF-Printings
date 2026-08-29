@@ -23,7 +23,7 @@ export default function PortfolioPage() {
           <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">{t('portfolio.pageDesc')}</p>
         </FadeIn>
         {(items?.length ?? 0) === 0 ? (
-          <div className="text-center py-20"><Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground">{lang === 'sq' ? 'Portofoli do të shtohet së shpejti.' : 'Portfolio coming soon.'}</p></div>
+          <div className="text-center py-20"><Camera className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground">{lang === 'sq' ? 'Portofoli do të plotësohet së shpejti.' : 'Portfolio coming soon.'}</p></div>
         ) : (
           <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(items ?? []).map((item: any) => (

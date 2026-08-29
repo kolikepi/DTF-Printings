@@ -39,14 +39,14 @@ export default function ProductsPage() {
         <FadeIn>
           <h1 className="font-display text-4xl font-bold tracking-tight text-center mb-4">{t('nav.products')}</h1>
           <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">
-            {lang === 'sq' ? 'Zgjidh produktin që dëshiron dhe personalizo me dizajnin tënd.' : 'Choose the product you want and customize it with your design.'}
+            {lang === 'sq' ? 'Zgjidhni produktin që dëshironi dhe personalizojeni me dizajnin tuaj.' : 'Choose the product you want and customize it with your design.'}
           </p>
         </FadeIn>
 
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 justify-center mb-8">
           <Button variant={!activeCategory ? 'default' : 'outline'} size="sm" onClick={() => setActiveCategory('')}>
-            <Filter className="h-4 w-4 mr-1" /> {lang === 'sq' ? 'Të Gjitha' : 'All'}
+            <Filter className="h-4 w-4 mr-1" /> {lang === 'sq' ? 'Të gjitha' : 'All'}
           </Button>
           {(categories ?? []).map((cat: any) => (
             <Button key={cat?.id} variant={activeCategory === cat?.slug ? 'default' : 'outline'} size="sm"

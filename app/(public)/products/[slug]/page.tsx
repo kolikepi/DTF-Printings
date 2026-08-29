@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/components/language-context';
+import { colorLabel, printAreaLabel } from '@/lib/catalog-labels';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { FadeIn, SlideIn } from '@/components/ui/animate';
@@ -143,7 +144,7 @@ export default function ProductDetailPage() {
                   <label className="text-sm font-medium mb-2 block">{t('product.color')}</label>
                   <div className="flex flex-wrap gap-2">
                     {(product?.colors ?? []).map((color: string) => (
-                      <Button key={color} variant={selectedColor === color ? 'default' : 'outline'} size="sm" onClick={() => setSelectedColor(color)}>{color}</Button>
+                      <Button key={color} variant={selectedColor === color ? 'default' : 'outline'} size="sm" onClick={() => setSelectedColor(color)}>{colorLabel(color, lang)}</Button>
                     ))}
                   </div>
                 </div>
@@ -155,7 +156,7 @@ export default function ProductDetailPage() {
                   <label className="text-sm font-medium mb-2 block">{t('product.printArea')}</label>
                   <div className="flex flex-wrap gap-2">
                     {(product?.printAreas ?? []).map((area: string) => (
-                      <Button key={area} variant={selectedPrintArea === area ? 'default' : 'outline'} size="sm" onClick={() => setSelectedPrintArea(area)}>{area}</Button>
+                      <Button key={area} variant={selectedPrintArea === area ? 'default' : 'outline'} size="sm" onClick={() => setSelectedPrintArea(area)}>{printAreaLabel(area, lang)}</Button>
                     ))}
                   </div>
                 </div>
@@ -184,7 +185,7 @@ export default function ProductDetailPage() {
                     )}
                     <input type="file" accept=".png,.jpg,.jpeg" onChange={handleUpload} className="hidden" id="design-upload" />
                     <label htmlFor="design-upload">
-                      <Button variant="outline" size="sm" asChild disabled={uploading}><span>{uploading ? (t('common.loading')) : (lang === 'sq' ? 'Zgjidh Skedarin' : 'Choose File')}</span></Button>
+                      <Button variant="outline" size="sm" asChild disabled={uploading}><span>{uploading ? (t('common.loading')) : (lang === 'sq' ? 'Zgjidh skedarin' : 'Choose File')}</span></Button>
                     </label>
                   </div>
                 </Card>
@@ -203,7 +204,7 @@ export default function ProductDetailPage() {
               <Link href="/mockup-designer" className="block mt-4">
                 <Button variant="outline" size="lg" className="w-full border-primary/30 hover:bg-primary/5">
                   <Palette className="h-5 w-5 mr-2 text-primary" />
-                  {lang === 'sq' ? 'Provoje në Dizajnues' : 'Try in Mockup Designer'}
+                  {lang === 'sq' ? 'Provoje te dizajnuesi' : 'Try in Mockup Designer'}
                 </Button>
               </Link>
             </div>

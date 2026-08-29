@@ -48,7 +48,7 @@ export default function AdminPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
             <Card className="p-4"><CardContent className="flex items-center gap-3"><ShoppingBag className="h-8 w-8 text-primary" /><div><p className="text-2xl font-bold">{orders?.length ?? 0}</p><p className="text-sm text-muted-foreground">{lang === 'sq' ? 'Porosi' : 'Orders'}</p></div></CardContent></Card>
-            <Card className="p-4"><CardContent className="flex items-center gap-3"><FileText className="h-8 w-8 text-primary" /><div><p className="text-2xl font-bold">{quotes?.length ?? 0}</p><p className="text-sm text-muted-foreground">{lang === 'sq' ? 'Kërkesa Oferte' : 'Quotes'}</p></div></CardContent></Card>
+            <Card className="p-4"><CardContent className="flex items-center gap-3"><FileText className="h-8 w-8 text-primary" /><div><p className="text-2xl font-bold">{quotes?.length ?? 0}</p><p className="text-sm text-muted-foreground">{lang === 'sq' ? 'Kërkesa oferte' : 'Quotes'}</p></div></CardContent></Card>
             <Card className="p-4"><CardContent className="flex items-center gap-3"><Mail className="h-8 w-8 text-primary" /><div><p className="text-2xl font-bold">{contacts?.length ?? 0}</p><p className="text-sm text-muted-foreground">{lang === 'sq' ? 'Mesazhe' : 'Messages'}</p></div></CardContent></Card>
           </div>
 

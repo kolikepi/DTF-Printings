@@ -61,7 +61,7 @@ export default function QuotePage() {
         <div className="mx-auto max-w-md">
           <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-100 flex items-center justify-center"><Check className="h-8 w-8 text-green-600" /></div>
           <h2 className="font-display text-2xl font-bold mb-2">{t('quote.success')}</h2>
-          <p className="text-muted-foreground">{lang === 'sq' ? 'Do tju kontaktojmë brenda 24 orëve.' : 'We will contact you within 24 hours.'}</p>
+          <p className="text-muted-foreground">{lang === 'sq' ? 'Do t’ju kontaktojmë brenda 24 orësh.' : 'We will contact you within 24 hours.'}</p>
         </div>
       </div>
     );
@@ -69,11 +69,11 @@ export default function QuotePage() {
 
   const productTypes = [
     { value: 'tshirt', label: lang === 'sq' ? 'Bluzë' : 'T-Shirt' },
-    { value: 'hoodie', label: lang === 'sq' ? 'Hoodë' : 'Hoodie' },
+    { value: 'hoodie', label: lang === 'sq' ? 'Hoodie' : 'Hoodie' },
     { value: 'sweatshirt', label: 'Sweatshirt' },
-    { value: 'polo', label: lang === 'sq' ? 'Triko/Polo' : 'Polo Shirt' },
-    { value: 'sportswear', label: lang === 'sq' ? 'Veshje Sportive' : 'Sportswear' },
-    { value: 'workwear', label: lang === 'sq' ? 'Uniforma Pune' : 'Workwear' },
+    { value: 'polo', label: lang === 'sq' ? 'Polo' : 'Polo Shirt' },
+    { value: 'sportswear', label: lang === 'sq' ? 'Veshje sportive' : 'Sportswear' },
+    { value: 'workwear', label: lang === 'sq' ? 'Uniforma pune' : 'Workwear' },
     { value: 'other', label: lang === 'sq' ? 'Tjetër' : 'Other' },
   ];
 
@@ -105,7 +105,7 @@ export default function QuotePage() {
                     <label className="text-sm font-medium mb-1 block">{t('quote.productType')}</label>
                     <select value={form.productType} onChange={(e: any) => setForm(p => ({ ...(p ?? {}), productType: e?.target?.value ?? '' }))}
                       className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background">
-                      <option value="">{lang === 'sq' ? 'Zgjedh...' : 'Select...'}</option>
+                      <option value="">{lang === 'sq' ? 'Zgjidhni…' : 'Select...'}</option>
                       {productTypes?.map((pt: any) => <option key={pt?.value} value={pt?.value}>{pt?.label}</option>)}
                     </select>
                   </div>
@@ -119,7 +119,7 @@ export default function QuotePage() {
                       <div className="flex items-center gap-2 justify-center text-green-600"><Check className="h-5 w-5" /><span className="text-sm">{lang === 'sq' ? 'Skedari u ngarkua' : 'File uploaded'}</span></div>
                     ) : (<><Upload className="h-6 w-6 mx-auto text-muted-foreground mb-1" /><p className="text-xs text-muted-foreground">PNG, JPG</p></>)}
                     <input type="file" accept=".png,.jpg,.jpeg" onChange={handleUpload} className="hidden" id="quote-upload" />
-                    <label htmlFor="quote-upload"><Button variant="outline" size="sm" asChild className="mt-2" disabled={uploading}><span>{uploading ? t('common.loading') : (lang === 'sq' ? 'Zgjidh Skedarin' : 'Choose File')}</span></Button></label>
+                    <label htmlFor="quote-upload"><Button variant="outline" size="sm" asChild className="mt-2" disabled={uploading}><span>{uploading ? t('common.loading') : (lang === 'sq' ? 'Zgjidh skedarin' : 'Choose File')}</span></Button></label>
                   </div>
                 </div>
                 <Button type="submit" disabled={sending} className="w-full"><Send className="h-4 w-4 mr-2" />{sending ? t('common.loading') : t('quote.submit')}</Button>

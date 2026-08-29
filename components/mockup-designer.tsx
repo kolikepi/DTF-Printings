@@ -24,56 +24,56 @@ const MOCKUP_TEMPLATES = [
   {
     id: 'white-tshirt',
     name: 'White T-Shirt',
-    nameAl: 'Bluzë e Bardhë',
+    nameAl: 'Bluzë e bardhë',
     image: '/mockups/white_tshirt.png',
     printAreas: {
-      'front-center': { x: 0.30, y: 0.25, w: 0.40, h: 0.35, label: 'Front Center', labelAl: 'Para Qendër' },
-      'left-chest': { x: 0.30, y: 0.22, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoks Majtas' },
-      'full-front': { x: 0.20, y: 0.18, w: 0.60, h: 0.50, label: 'Full Front', labelAl: 'Para e Plotë' },
+      'front-center': { x: 0.30, y: 0.25, w: 0.40, h: 0.35, label: 'Front Center', labelAl: 'Qendër, para' },
+      'left-chest': { x: 0.30, y: 0.22, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoksi majtas' },
+      'full-front': { x: 0.20, y: 0.18, w: 0.60, h: 0.50, label: 'Full Front', labelAl: 'Pjesa e përparme' },
     },
   },
   {
     id: 'black-tshirt',
     name: 'Black T-Shirt',
-    nameAl: 'Bluzë e Zezë',
+    nameAl: 'Bluzë e zezë',
     image: '/mockups/black_tshirt.png',
     printAreas: {
-      'front-center': { x: 0.30, y: 0.25, w: 0.40, h: 0.35, label: 'Front Center', labelAl: 'Para Qendër' },
-      'left-chest': { x: 0.30, y: 0.22, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoks Majtas' },
-      'full-front': { x: 0.20, y: 0.18, w: 0.60, h: 0.50, label: 'Full Front', labelAl: 'Para e Plotë' },
+      'front-center': { x: 0.30, y: 0.25, w: 0.40, h: 0.35, label: 'Front Center', labelAl: 'Qendër, para' },
+      'left-chest': { x: 0.30, y: 0.22, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoksi majtas' },
+      'full-front': { x: 0.20, y: 0.18, w: 0.60, h: 0.50, label: 'Full Front', labelAl: 'Pjesa e përparme' },
     },
   },
   {
     id: 'black-hoodie',
     name: 'Black Hoodie',
-    nameAl: 'Hoodie e Zezë',
+    nameAl: 'Hoodie e zezë',
     image: '/mockups/black_hoodie.png',
     printAreas: {
-      'front-center': { x: 0.28, y: 0.30, w: 0.44, h: 0.30, label: 'Front Center', labelAl: 'Para Qendër' },
-      'left-chest': { x: 0.28, y: 0.26, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoks Majtas' },
-      'full-front': { x: 0.18, y: 0.22, w: 0.64, h: 0.45, label: 'Full Front', labelAl: 'Para e Plotë' },
+      'front-center': { x: 0.28, y: 0.30, w: 0.44, h: 0.30, label: 'Front Center', labelAl: 'Qendër, para' },
+      'left-chest': { x: 0.28, y: 0.26, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoksi majtas' },
+      'full-front': { x: 0.18, y: 0.22, w: 0.64, h: 0.45, label: 'Full Front', labelAl: 'Pjesa e përparme' },
     },
   },
   {
     id: 'gray-sweatshirt',
     name: 'Gray Sweatshirt',
-    nameAl: 'Sweatshirt Gri',
+    nameAl: 'Sweatshirt gri',
     image: '/mockups/gray_sweatshirt.png',
     printAreas: {
-      'front-center': { x: 0.28, y: 0.28, w: 0.44, h: 0.32, label: 'Front Center', labelAl: 'Para Qendër' },
-      'left-chest': { x: 0.28, y: 0.24, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoks Majtas' },
-      'full-front': { x: 0.18, y: 0.20, w: 0.64, h: 0.48, label: 'Full Front', labelAl: 'Para e Plotë' },
+      'front-center': { x: 0.28, y: 0.28, w: 0.44, h: 0.32, label: 'Front Center', labelAl: 'Qendër, para' },
+      'left-chest': { x: 0.28, y: 0.24, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoksi majtas' },
+      'full-front': { x: 0.18, y: 0.20, w: 0.64, h: 0.48, label: 'Full Front', labelAl: 'Pjesa e përparme' },
     },
   },
   {
     id: 'white-polo',
     name: 'White Polo',
-    nameAl: 'Polo e Bardhë',
+    nameAl: 'Polo e bardhë',
     image: '/mockups/white_polo.png',
     printAreas: {
-      'front-center': { x: 0.30, y: 0.28, w: 0.40, h: 0.30, label: 'Front Center', labelAl: 'Para Qendër' },
-      'left-chest': { x: 0.30, y: 0.24, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoks Majtas' },
-      'full-front': { x: 0.22, y: 0.20, w: 0.56, h: 0.44, label: 'Full Front', labelAl: 'Para e Plotë' },
+      'front-center': { x: 0.30, y: 0.28, w: 0.40, h: 0.30, label: 'Front Center', labelAl: 'Qendër, para' },
+      'left-chest': { x: 0.30, y: 0.24, w: 0.18, h: 0.12, label: 'Left Chest', labelAl: 'Gjoksi majtas' },
+      'full-front': { x: 0.22, y: 0.20, w: 0.56, h: 0.44, label: 'Full Front', labelAl: 'Pjesa e përparme' },
     },
   },
 ];
@@ -262,33 +262,33 @@ export default function MockupDesigner() {
   const currentPrintArea = selectedTemplate.printAreas[selectedPrintArea as keyof typeof selectedTemplate.printAreas];
 
   const texts = {
-    title: lang === 'sq' ? 'Dizajnuesi i Mockup-it' : 'Mockup Designer',
+    title: lang === 'sq' ? 'Dizajnuesi i mockup-eve' : 'Mockup Designer',
     subtitle: lang === 'sq'
       ? 'Ngarko logon ose dizajnin tënd dhe shiko live si do të duket në produkt.'
       : 'Upload your logo or design and see a live preview on the product.',
-    uploadDesign: lang === 'sq' ? 'Ngarko Dizajnin' : 'Upload Design',
-    changeDesign: lang === 'sq' ? 'Ndrysho Dizajnin' : 'Change Design',
-    selectProduct: lang === 'sq' ? 'Zgjidh Produktin' : 'Select Product',
-    printArea: lang === 'sq' ? 'Zona e Printimit' : 'Print Area',
+    uploadDesign: lang === 'sq' ? 'Ngarko dizajnin' : 'Upload Design',
+    changeDesign: lang === 'sq' ? 'Ndrysho dizajnin' : 'Change Design',
+    selectProduct: lang === 'sq' ? 'Zgjidh produktin' : 'Select Product',
+    printArea: lang === 'sq' ? 'Zona e printimit' : 'Print Area',
     tools: lang === 'sq' ? 'Mjetet' : 'Tools',
-    rotateLeft: lang === 'sq' ? 'Rrotullo Majtas' : 'Rotate Left',
-    rotateRight: lang === 'sq' ? 'Rrotullo Djathtas' : 'Rotate Right',
+    rotateLeft: lang === 'sq' ? 'Rrotullo majtas' : 'Rotate Left',
+    rotateRight: lang === 'sq' ? 'Rrotullo djathtas' : 'Rotate Right',
     zoomIn: lang === 'sq' ? 'Zmadho' : 'Zoom In',
     zoomOut: lang === 'sq' ? 'Zvogëlo' : 'Zoom Out',
-    flipH: lang === 'sq' ? 'Kthe Horizontal' : 'Flip Horizontal',
-    flipV: lang === 'sq' ? 'Kthe Vertikal' : 'Flip Vertical',
-    remove: lang === 'sq' ? 'Hiq Dizajnin' : 'Remove Design',
-    download: lang === 'sq' ? 'Shkarko Mockup' : 'Download Mockup',
+    flipH: lang === 'sq' ? 'Pasqyro horizontalisht' : 'Flip Horizontal',
+    flipV: lang === 'sq' ? 'Pasqyro vertikalisht' : 'Flip Vertical',
+    remove: lang === 'sq' ? 'Hiq dizajnin' : 'Remove Design',
+    download: lang === 'sq' ? 'Shkarko mockup-in' : 'Download Mockup',
     dragHint: lang === 'sq'
       ? 'Kliko dhe tërhiq për të lëvizur. Përdor dorezat për të ndryshuar madhësinë dhe rotacionin.'
       : 'Click and drag to move. Use handles to resize and rotate.',
     uploadHint: lang === 'sq'
       ? 'Ngarko një skedar PNG me sfond transparent për rezultat më të mirë.'
       : 'Upload a PNG file with transparent background for best results.',
-    showZone: lang === 'sq' ? 'Shfaq Zonën' : 'Show Zone',
-    hideZone: lang === 'sq' ? 'Fshih Zonën' : 'Hide Zone',
-    requestQuote: lang === 'sq' ? 'Kërko Ofertë' : 'Request Quote',
-    orderNow: lang === 'sq' ? 'Porosit Tani' : 'Order Now',
+    showZone: lang === 'sq' ? 'Shfaq zonën' : 'Show Zone',
+    hideZone: lang === 'sq' ? 'Fshih zonën' : 'Hide Zone',
+    requestQuote: lang === 'sq' ? 'Kërko ofertë' : 'Request Quote',
+    orderNow: lang === 'sq' ? 'Porosit tani' : 'Order Now',
   };
 
   return (
@@ -530,11 +530,11 @@ export default function MockupDesigner() {
                   </Button>
                   <Button variant="outline" size="sm" onClick={() => handleFlip('x')} title={texts.flipH}>
                     <FlipHorizontal className="h-4 w-4 mr-1.5" />
-                    <span className="text-xs">{lang === 'sq' ? 'Kthe H' : 'Flip H'}</span>
+                    <span className="text-xs">{lang === 'sq' ? 'Pasqyro H' : 'Flip H'}</span>
                   </Button>
                   <Button variant="outline" size="sm" onClick={() => handleFlip('y')} title={texts.flipV}>
                     <FlipVertical className="h-4 w-4 mr-1.5" />
-                    <span className="text-xs">{lang === 'sq' ? 'Kthe V' : 'Flip V'}</span>
+                    <span className="text-xs">{lang === 'sq' ? 'Pasqyro V' : 'Flip V'}</span>
                   </Button>
                 </div>
                 <Button

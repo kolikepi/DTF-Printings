@@ -75,7 +75,7 @@ export default function ServicesPage() {
             <div className="flex items-center gap-3 mb-6">
               <Ruler className="h-6 w-6 text-primary" />
               <h2 className="font-display text-2xl font-bold tracking-tight">
-                {lang === 'sq' ? 'Zonat e Printimit' : 'Print Areas'}
+                {lang === 'sq' ? 'Zonat e printimit' : 'Print Areas'}
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -86,7 +86,7 @@ export default function ServicesPage() {
               ))}
             </div>
             <p className="text-sm text-muted-foreground mt-4">
-              {lang === 'sq' ? 'Kërkesat për skedarin: PNG, sfond transparent, 300 DPI, minimum 3000x3000px' : 'File requirements: PNG, transparent background, 300 DPI, minimum 3000x3000px'}
+              {lang === 'sq' ? 'Kërkesat për skedarin: PNG, sfond transparent, 300 DPI, minimumi 3000×3000 px' : 'File requirements: PNG, transparent background, 300 DPI, minimum 3000x3000px'}
             </p>
           </div>
         </FadeIn>

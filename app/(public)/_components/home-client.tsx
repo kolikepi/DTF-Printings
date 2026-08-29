@@ -101,10 +101,10 @@ export function HomeClient() {
           <FadeIn delay={0.4}>
             <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { value: 500, suffix: '+', label: lang === 'sq' ? 'Klientë të Kënaqur' : 'Happy Clients' },
-                { value: 10000, suffix: '+', label: lang === 'sq' ? 'Produkte të Printuara' : 'Products Printed' },
-                { value: 3, suffix: '-5 ' + (lang === 'sq' ? 'ditë' : 'days'), label: lang === 'sq' ? 'Dorëzim i Shpejtë' : 'Fast Delivery' },
-                { value: 1, suffix: ' copë', label: lang === 'sq' ? 'Sasia Minimale' : 'Minimum Order' },
+                { value: 500, suffix: '+', label: lang === 'sq' ? 'Klientë të kënaqur' : 'Happy Clients' },
+                { value: 10000, suffix: '+', label: lang === 'sq' ? 'Produkte të printuara' : 'Products Printed' },
+                { value: 3, suffix: '-5 ' + (lang === 'sq' ? 'ditë' : 'days'), label: lang === 'sq' ? 'Dorëzim i shpejtë' : 'Fast Delivery' },
+                { value: 1, suffix: ' copë', label: lang === 'sq' ? 'Sasia minimale' : 'Minimum Order' },
               ].map((stat: any, i: number) => (
                 <div key={i} className="text-center"><div className="text-2xl md:text-3xl font-bold text-primary"><CountUp end={stat?.value ?? 0} suffix={stat?.suffix ?? ''} /></div><p className="text-sm opacity-70 mt-1">{stat?.label ?? ''}</p></div>
               ))}
@@ -116,7 +116,7 @@ export function HomeClient() {
       {/* How It Works */}
       <section className="py-20 bg-muted/50">
         <div className="mx-auto max-w-[1200px] px-4">
-          <FadeIn><h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-center mb-4">{t('howItWorks.title')}</h2><p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">{lang === 'sq' ? 'Procesi ynë i thjeshtë në 4 hapa' : 'Our simple 4-step process'}</p></FadeIn>
+          <FadeIn><h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-center mb-4">{t('howItWorks.title')}</h2><p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">{lang === 'sq' ? 'Procesi ynë i thjeshtë, në 4 hapa' : 'Our simple 4-step process'}</p></FadeIn>
           <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps?.map((step: any, i: number) => {
               const Icon = step?.icon ?? Upload;
@@ -138,21 +138,21 @@ export function HomeClient() {
                     {lang === 'sq' ? 'I RI!' : 'NEW!'}
                   </div>
                   <h2 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-3">
-                    {lang === 'sq' ? 'Provo Dizajnin Tënd Live' : 'Preview Your Design Live'}
+                    {lang === 'sq' ? 'Provoni dizajnin tuaj drejtpërdrejt' : 'Preview Your Design Live'}
                   </h2>
                   <p className="text-muted-foreground mb-6">
                     {lang === 'sq'
-                      ? 'Ngarko logon ose dizajnin tënd dhe shiko si do të duket në produkt para se ta porosisësh. Lëviz, ndrysho madhësinë, rrotullo — gjithçka live!'
+                      ? 'Ngarkoni logon ose dizajnin tuaj dhe shihni si duket mbi produkt përpara se ta porosisni. Lëvizeni, ndryshojini madhësinë, rrotullojeni — gjithçka në çast.'
                       : 'Upload your logo or design and see how it will look on the product before you order. Move, resize, rotate — all live!'}
                   </p>
                   <Link href="/mockup-designer">
                     <Button size="lg" className="text-base px-8">
-                      {lang === 'sq' ? 'Hap Dizajnuesin' : 'Open Designer'} <ArrowRight className="ml-2 h-5 w-5" />
+                      {lang === 'sq' ? 'Hap dizajnuesin' : 'Open Designer'} <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
                 </div>
                 <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
-                  <Image src="/mockups/white_tshirt.png" alt={lang === 'sq' ? 'Dizajnuesi i Mockup-it' : 'Mockup Designer Preview'} fill className="object-contain p-4" />
+                  <Image src="/mockups/white_tshirt.png" alt={lang === 'sq' ? 'Dizajnuesi i mockup-eve' : 'Mockup Designer Preview'} fill className="object-contain p-4" />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-6">
                       {lang === 'sq' ? 'LOGO JUAJ KËTU' : 'YOUR LOGO HERE'}
@@ -171,10 +171,10 @@ export function HomeClient() {
           <FadeIn><h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-center mb-12">{t('categories.title')}</h2></FadeIn>
           <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {(categories?.length ? categories : [
-              { slug: 'tshirts', name: 'Custom T-Shirts', nameAl: 'Bluzë të Personalizuara' },
-              { slug: 'hoodies', name: 'Custom Hoodies', nameAl: 'Hoodë të Personalizuara' },
-              { slug: 'sportswear', name: 'Sportswear', nameAl: 'Veshje Sportive' },
-              { slug: 'workwear', name: 'Workwear', nameAl: 'Uniforma Pune' },
+              { slug: 'tshirts', name: 'Custom T-Shirts', nameAl: 'Bluza të personalizuara' },
+              { slug: 'hoodies', name: 'Custom Hoodies', nameAl: 'Hoodie të personalizuara' },
+              { slug: 'sportswear', name: 'Sportswear', nameAl: 'Veshje sportive' },
+              { slug: 'workwear', name: 'Workwear', nameAl: 'Uniforma pune' },
               { slug: 'dtf-transfers', name: 'DTF Transfers', nameAl: 'Transferta DTF' },
             ])?.map((cat: any) => (
               <StaggerItem key={cat?.slug ?? cat?.id}>
@@ -193,14 +193,14 @@ export function HomeClient() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <SlideIn from="left"><div className="relative aspect-video rounded-lg overflow-hidden bg-muted"><Image src={CDN.about} alt="Elev8 Printings workshop" fill className="object-cover" /></div></SlideIn>
             <SlideIn from="right"><div>
-              <h2 className="font-display text-3xl font-bold tracking-tight mb-4">{lang === 'sq' ? 'Pse të Zgjidhni Elev8 Printings?' : 'Why Choose Elev8 Printings?'}</h2>
+              <h2 className="font-display text-3xl font-bold tracking-tight mb-4">{lang === 'sq' ? 'Pse të zgjidhni Elev8 Printings?' : 'Why Choose Elev8 Printings?'}</h2>
               <p className="text-muted-foreground mb-6">{lang === 'sq' ? 'Ne ofrojmë printim DTF profesional me cilësinë më të lartë në Tiranë. Me pajisje profesionale dhe transferta të porosituara nga furnizuesët më të mirë europianë, garantojmë rezultate të shkëlqyera.' : 'We offer professional DTF printing with the highest quality in Tirana. With professional equipment and transfers ordered from the best European suppliers, we guarantee excellent results.'}</p>
               <div className="space-y-3">
-                {[lang === 'sq' ? 'Cilësi e lartë e printimit DTF' : 'High quality DTF printing', lang === 'sq' ? 'Sasi minimale vetëm 1 copë' : 'Minimum order just 1 piece', lang === 'sq' ? 'Dorëzim brenda 3-5 ditëve pune' : 'Delivery within 3-5 business days', lang === 'sq' ? 'Çmime konkurruese' : 'Competitive pricing'].map((item: string, i: number) => (
+                {[lang === 'sq' ? 'Cilësi e lartë e printimit DTF' : 'High quality DTF printing', lang === 'sq' ? 'Minimumi vetëm 1 copë' : 'Minimum order just 1 piece', lang === 'sq' ? 'Dorëzim brenda 3–5 ditësh pune' : 'Delivery within 3-5 business days', lang === 'sq' ? 'Çmime konkurruese' : 'Competitive pricing'].map((item: string, i: number) => (
                   <div key={i} className="flex items-center gap-3"><div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0"><Shirt className="h-3 w-3 text-primary" /></div><span className="text-sm">{item}</span></div>
                 ))}
               </div>
-              <Link href="/services" className="inline-block mt-6"><Button>{lang === 'sq' ? 'Mëso Më Shumë' : 'Learn More'} <ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
+              <Link href="/services" className="inline-block mt-6"><Button>{lang === 'sq' ? 'Mëso më shumë' : 'Learn More'} <ArrowRight className="ml-2 h-4 w-4" /></Button></Link>
             </div></SlideIn>
           </div>
         </div>

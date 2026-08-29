@@ -22,8 +22,8 @@ export default function AccountPage() {
   if (!session?.user) return null;
 
   const links = [
-    { href: '/account/orders', icon: Package, label: t('nav.orders'), desc: lang === 'sq' ? 'Shiko historikun e porosive' : 'View order history' },
-    { href: '/quote', icon: FileText, label: t('nav.requestQuote'), desc: lang === 'sq' ? 'Kërko një ofertë të re' : 'Request a new quote' },
+    { href: '/account/orders', icon: Package, label: t('nav.orders'), desc: lang === 'sq' ? 'Shihni historikun e porosive' : 'View order history' },
+    { href: '/quote', icon: FileText, label: t('nav.requestQuote'), desc: lang === 'sq' ? 'Kërkoni një ofertë të re' : 'Request a new quote' },
   ];
 
   return (
