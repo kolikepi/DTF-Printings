@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: elev8
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-elev8}
+      POSTGRES_DB: elev8_printings
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U elev8 -d elev8_printings']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://elev8:${POSTGRES_PASSWORD:-elev8}@db:5432/elev8_printings
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?vendos NEXTAUTH_SECRET ne .env}
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      STORAGE_DRIVER: ${STORAGE_DRIVER:-local}
+      UPLOAD_DIR: /app/storage
+    ports:
+      - '3000:3000'
+    volumes:
+      - uploads:/app/storage
+
+volumes:
+  db-data:
+  uploads:
