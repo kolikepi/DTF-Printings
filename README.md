@@ -203,6 +203,17 @@ adresën përpara se të përdorësh faqet ligjore.
 
 ---
 
+## Mjedisi live
+
+Faqja është e deploy-uar në **Vercel** (projekti `dtf-printings`, ekipi Elev8) me databazë
+**Neon** në Frankfurt. Çdo push te `main` bën deploy vetë. Variablat e mjedisit vendosen
+te Vercel → Settings → Environment Variables; nuk ruhen kurrë në repo.
+
+Ende pa konfiguruar: `RESEND_API_KEY` për email-et dhe storage-i S3/R2 për dizajnet e
+ngarkuara nga klientët (Vercel nuk mban disk të përhershëm).
+
+---
+
 ## Deploy
 
 - **VPS / Docker:** `docker compose up -d --build` pas `.env`; vendos një reverse proxy
