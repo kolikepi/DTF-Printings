@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/components/language-context';
 import { Button } from '@/components/ui/button';
 import { FadeIn } from '@/components/ui/animate';
@@ -9,6 +10,7 @@ import { CheckCircle, Package, Home } from 'lucide-react';
 
 export default function OrderConfirmationPage() {
   const { lang } = useLanguage();
+  const { data: session } = useSession() || {};
   const searchParams = useSearchParams();
   const orderNumber = searchParams?.get('order') ?? '';
 
@@ -26,10 +28,14 @@ export default function OrderConfirmationPage() {
             </p>
           )}
           <p className="text-muted-foreground mb-8">
-            {lang === 'sq' ? 'Do t’ju kontaktojmë për të konfirmuar porosinë. Faleminderit!' : 'We will contact you for order confirmation. Thank you!'}
+            {lang === 'sq'
+              ? 'Konfirmimin ua dërguam me email. Do t’ju kontaktojmë për detajet e dorëzimit. Faleminderit!'
+              : 'We emailed you the confirmation. We will contact you about delivery. Thank you!'}
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/account/orders"><Button variant="outline"><Package className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Shiko porositë' : 'View Orders'}</Button></Link>
+            {session?.user && (
+              <Link href="/account/orders"><Button variant="outline"><Package className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Shiko porositë' : 'View Orders'}</Button></Link>
+            )}
             <Link href="/"><Button><Home className="h-4 w-4 mr-2" />{lang === 'sq' ? 'Kryefaqja' : 'Home'}</Button></Link>
           </div>
         </FadeIn>

@@ -3,6 +3,8 @@ import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/sonner';
 import { ChunkLoadErrorHandler } from '@/components/chunk-load-error-handler';
+import { Analytics } from '@/components/analytics';
+import { jsonLdScript, localBusinessJsonLd } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,11 +31,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="sq" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${jakartaSans.variable} ${jetbrainsMono.variable} font-sans`}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(localBusinessJsonLd())} />
         <Providers>
           {children}
           <Toaster />
           <ChunkLoadErrorHandler />
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

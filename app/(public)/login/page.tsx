@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/components/language-context';
+import { clearGuestCart, guestCartPayload } from '@/lib/guest-cart';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
@@ -25,7 +26,19 @@ export default function LoginPage() {
     try {
       const result = await signIn('credentials', { email, password, redirect: false });
       if (result?.ok) {
-        router.replace('/');
+        // Shporta e mbledhur si vizitor kalon te llogaria, që të mos humbasë.
+        const pending = guestCartPayload();
+        if (pending.length) {
+          try {
+            const merge = await fetch('/api/cart/merge', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ items: pending }),
+            });
+            if (merge.ok) clearGuestCart();
+          } catch { /* shporta mbetet te browser-i */ }
+        }
+        router.replace(pending.length ? '/cart' : '/');
       } else {
         toast.error(t('common.error'));
       }

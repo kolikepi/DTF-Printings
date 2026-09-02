@@ -1,26 +1,26 @@
 generator client {
-    provider = "prisma-client-js"
-    binaryTargets = ["native"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String     @unique
   emailVerified DateTime?
   password      String?
   image         String?
-  role          String    @default("customer")
+  role          String     @default("customer")
   phone         String?
   address       String?
   city          String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
   accounts      Account[]
   sessions      Session[]
   orders        Order[]
@@ -63,16 +63,16 @@ model VerificationToken {
 }
 
 model Category {
-  id          String    @id @default(cuid())
-  name        String
-  nameAl      String
-  slug        String    @unique
-  description String?
+  id            String    @id @default(cuid())
+  name          String
+  nameAl        String
+  slug          String    @unique
+  description   String?
   descriptionAl String?
-  imageUrl    String?
-  sortOrder   Int       @default(0)
-  createdAt   DateTime  @default(now())
-  products    Product[]
+  imageUrl      String?
+  sortOrder     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  products      Product[]
 }
 
 model Product {
@@ -123,9 +123,11 @@ model CartItem {
 model Order {
   id              String      @id @default(cuid())
   orderNumber     String      @unique
-  userId          String
-  user            User        @relation(fields: [userId], references: [id])
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  customerEmail   String?
   status          String      @default("pending")
+  adminNote       String?
   subtotal        Float
   shippingCost    Float       @default(0)
   total           Float
@@ -162,21 +164,22 @@ model OrderItem {
 }
 
 model Quote {
-  id          String   @id @default(cuid())
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id])
-  name        String
-  email       String
-  phone       String?
-  company     String?
-  description String
-  quantity    Int?
-  productType String?
+  id              String   @id @default(cuid())
+  userId          String?
+  user            User?    @relation(fields: [userId], references: [id])
+  name            String
+  email           String
+  phone           String?
+  company         String?
+  description     String
+  quantity        Int?
+  productType     String?
   designCloudPath String?
   designIsPublic  Boolean  @default(false)
-  status      String   @default("new")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  status          String   @default("new")
+  adminNote       String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Contact {
@@ -187,6 +190,7 @@ model Contact {
   subject   String?
   message   String
   status    String   @default("new")
+  adminNote String?
   createdAt DateTime @default(now())
 }
 
@@ -197,16 +201,16 @@ model Newsletter {
 }
 
 model PortfolioItem {
-  id          String   @id @default(cuid())
-  title       String
-  titleAl     String
-  description String?
+  id            String   @id @default(cuid())
+  title         String
+  titleAl       String
+  description   String?
   descriptionAl String?
-  imageUrl    String
-  category    String?
-  isFeatured  Boolean  @default(false)
-  sortOrder   Int      @default(0)
-  createdAt   DateTime @default(now())
+  imageUrl      String
+  category      String?
+  isFeatured    Boolean  @default(false)
+  sortOrder     Int      @default(0)
+  createdAt     DateTime @default(now())
 }
 
 model Testimonial {

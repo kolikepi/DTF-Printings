@@ -1,22 +1,12 @@
-'use client';
+import { pageMetadata } from '@/lib/seo';
+import MockupDesignerClient from '@/app/(public)/_components/mockup-designer-client';
 
-import dynamic from 'next/dynamic';
-import { FadeIn } from '@/components/ui/animate';
-
-// Dynamic import to avoid SSR issues with Konva
-const MockupDesigner = dynamic(() => import('@/components/mockup-designer'), {
-  ssr: false,
-  loading: () => (
-    <div className="py-20 text-center text-muted-foreground">
-      <div className="animate-pulse">Loading designer...</div>
-    </div>
-  ),
+export const metadata = pageMetadata({
+  title: 'Dizajnuesi i mockup-eve — provoje dizajnin mbi produkt',
+  description: 'Ngarkoni logon dhe shihni si duket mbi bluzë, hoodie ose polo përpara se ta porosisni.',
+  path: '/mockup-designer',
 });
 
-export default function MockupDesignerPage() {
-  return (
-    <FadeIn>
-      <MockupDesigner />
-    </FadeIn>
-  );
+export default function Page() {
+  return <MockupDesignerClient />;
 }

@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/components/language-context';
 import { colorLabel, printAreaLabel } from '@/lib/catalog-labels';
+import { amountToFreeShipping, formatPrice, lineTotal, shippingFor, subtotalFor, unitPriceFor, discountFor } from '@/lib/pricing';
+import { CART_EVENT, readGuestCart, removeGuestCartItem, updateGuestCartItem } from '@/lib/guest-cart';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { FadeIn } from '@/components/ui/animate';
@@ -18,32 +20,44 @@ export default function CartPage() {
   const [items, setItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const guest = !session?.user;
+
   const fetchCart = useCallback(async () => {
-    if (!session?.user) { setItems([]); setLoading(false); return; }
+    // Klienti me llogari e ka shportën te serveri; vizitori te browser-i i vet.
+    if (guest) {
+      setItems(readGuestCart().map((line) => ({ ...line, product: line })));
+      setLoading(false);
+      return;
+    }
     try {
       const res = await fetch('/api/cart');
       if (res?.ok) { const data = await res.json(); setItems(data?.items ?? []); }
     } catch { /* ignore */ }
     setLoading(false);
-  }, [session?.user]);
+  }, [guest]);
 
   useEffect(() => { fetchCart(); }, [fetchCart]);
 
+  useEffect(() => {
+    if (!guest) return;
+    const sync = () => fetchCart();
+    window.addEventListener(CART_EVENT, sync);
+    return () => window.removeEventListener(CART_EVENT, sync);
+  }, [guest, fetchCart]);
+
   const removeItem = async (id: string) => {
+    if (guest) { removeGuestCartItem(id); fetchCart(); return; }
     try { await fetch(`/api/cart/${id}`, { method: 'DELETE' }); fetchCart(); } catch { toast.error(t('common.error')); }
   };
 
   const updateQty = async (id: string, qty: number) => {
+    if (guest) { updateGuestCartItem(id, Math.max(1, qty)); fetchCart(); return; }
     try { await fetch(`/api/cart/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ quantity: Math.max(1, qty) }) }); fetchCart(); } catch { /* ignore */ }
   };
 
-  const subtotal = (items ?? []).reduce((s: number, i: any) => s + ((i?.product?.basePrice ?? 0) * (i?.quantity ?? 1)), 0);
-  const shipping = subtotal >= 5000 ? 0 : 300;
+  const subtotal = subtotalFor((items ?? []).map((i: any) => ({ basePrice: i?.product?.basePrice ?? 0, quantity: i?.quantity ?? 1 })));
+  const shipping = shippingFor(subtotal);
   const total = subtotal + shipping;
-
-  if (!session?.user) {
-    return (<div className="py-20 text-center"><ShoppingCart className="h-12 w-12 mx-auto text-muted-foreground mb-4" /><p className="text-muted-foreground mb-4">{lang === 'sq' ? 'Hyr në llogari për të parë shportën.' : 'Log in to view your cart.'}</p><Link href="/login"><Button>{t('nav.login')}</Button></Link></div>);
-  }
 
   return (
     <div className="py-12">
@@ -64,7 +78,14 @@ export default function CartPage() {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold truncate">{lang === 'sq' ? (item?.product?.nameAl ?? item?.product?.name) : (item?.product?.name ?? '')}</h3>
                       <p className="text-sm text-muted-foreground">{[item?.size, colorLabel(item?.color, lang), printAreaLabel(item?.printArea, lang)].filter(Boolean).join(' • ')}</p>
-                      <p className="font-bold text-primary mt-1">{item?.product?.basePrice ?? 0} {t('common.lek')}</p>
+                      <p className="font-bold text-primary mt-1">
+                        {formatPrice(lineTotal(item?.product?.basePrice ?? 0, item?.quantity ?? 1), lang)}
+                        {discountFor(item?.quantity ?? 1) > 0 && (
+                          <span className="ml-2 text-xs font-normal text-muted-foreground">
+                            {formatPrice(unitPriceFor(item?.product?.basePrice ?? 0, item?.quantity ?? 1), lang)} / {lang === 'sq' ? 'copë' : 'pc'} · −{Math.round(discountFor(item?.quantity ?? 1) * 100)}%
+                          </span>
+                        )}
+                      </p>
                     </div>
                     <div className="flex flex-col items-end gap-2">
                       <Button variant="ghost" size="icon-sm" onClick={() => removeItem(item?.id)}><Trash2 className="h-4 w-4 text-destructive" /></Button>
@@ -83,14 +104,20 @@ export default function CartPage() {
               <Card className="p-6 sticky top-20">
                 <CardContent>
                   <div className="space-y-3 text-sm">
-                    <div className="flex justify-between"><span>{t('cart.subtotal')}</span><span className="font-medium">{subtotal} {t('common.lek')}</span></div>
-                    <div className="flex justify-between"><span>{t('cart.shipping')}</span><span className="font-medium">{shipping === 0 ? (lang === 'sq' ? 'Falas' : 'Free') : `${shipping} ${t('common.lek')}`}</span></div>
-                    <div className="border-t pt-3 flex justify-between text-lg font-bold"><span>{t('cart.total')}</span><span className="text-primary">{total} {t('common.lek')}</span></div>
+                    <div className="flex justify-between"><span>{t('cart.subtotal')}</span><span className="font-medium">{formatPrice(subtotal, lang)}</span></div>
+                    <div className="flex justify-between"><span>{t('cart.shipping')}</span><span className="font-medium">{shipping === 0 ? (lang === 'sq' ? 'Falas' : 'Free') : formatPrice(shipping, lang)}</span></div>
+                    <div className="border-t pt-3 flex justify-between text-lg font-bold"><span>{t('cart.total')}</span><span className="text-primary">{formatPrice(total, lang)}</span></div>
                   </div>
                   <Link href="/checkout" className="block mt-4">
                     <Button className="w-full">{t('cart.checkout')} <ArrowRight className="ml-2 h-4 w-4" /></Button>
                   </Link>
-                  {shipping > 0 && <p className="text-xs text-muted-foreground mt-2 text-center">{lang === 'sq' ? 'Transport falas mbi 5.000 Lekë' : 'Free shipping over 5,000 ALL'}</p>}
+                  {shipping > 0 && (
+                    <p className="text-xs text-muted-foreground mt-2 text-center">
+                      {lang === 'sq'
+                        ? `Shto edhe ${formatPrice(amountToFreeShipping(subtotal), 'sq')} për transport falas`
+                        : `Add ${formatPrice(amountToFreeShipping(subtotal), 'en')} more for free shipping`}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             </div>

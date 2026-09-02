@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
+import { CART_EVENT, guestCartCount } from '@/lib/guest-cart';
 
 export function useCartCount() {
   const { data: session } = useSession() || {};
   const [count, setCount] = useState(0);
 
   const fetchCount = useCallback(async () => {
-    if (!session?.user) { setCount(0); return; }
+    if (!session?.user) { setCount(guestCartCount()); return; }
     try {
       const res = await fetch('/api/cart');
       if (res?.ok) {
@@ -20,6 +21,9 @@ export function useCartCount() {
 
   useEffect(() => {
     fetchCount();
+    // Shporta e vizitorit ndryshon te browser-i, pa asnjë kërkesë te serveri.
+    window.addEventListener(CART_EVENT, fetchCount);
+    return () => window.removeEventListener(CART_EVENT, fetchCount);
   }, [fetchCount]);
 
   return count;

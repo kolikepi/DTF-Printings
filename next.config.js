@@ -8,7 +8,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  images: { unoptimized: true },
+  images: {
+    // Next-i i shërben vetë në WebP/AVIF, në përmasat që kërkon pajisja.
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [360, 480, 640, 828, 1080, 1280, 1600],
+  },
   webpack: (config) => {
     // Konva kërkon paketën native `canvas` vetëm në Node; designer-i ekzekutohet
     // gjithsesi vetëm në browser (ssr: false), ndaj e heqim nga bundle-i.

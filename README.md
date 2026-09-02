@@ -1,7 +1,8 @@
 # Elev8 Printings — website e-commerce për printim DTF
 
 Website bilingual (Shqip/Anglisht) për biznesin e printimit DTF: katalog produktesh,
-kërkesa oferte me ngarkim dizajni, shportë + checkout, mockup designer 2D dhe panel admini.
+kërkesa oferte me ngarkim dizajni, blerje pa llogari, mockup designer 2D dhe panel admini
+me statuse porosish. Çdo kërkesë njoftohet me email, te ti dhe te klienti.
 
 Ky version është **plotësisht i pavarur** — nuk varet nga Abacus AI ose nga ndonjë platformë
 tjetër hosting. E ekzekuton kudo: VPS, Docker, Vercel, Railway, Coolify, kompjuteri yt.
@@ -78,6 +79,59 @@ Opsionale: `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `STORAGE_DRIVER`, `UPLOAD_DIR`,
 
 ---
 
+## Njoftimet me email
+
+Çdo kërkesë oferte, mesazh kontakti dhe porosi dërgon dy email: një te ti (me lidhjen
+te paneli dhe dizajnin e bashkangjitur) dhe një te klienti (konfirmim). Kur ndryshon
+statusin e një porosie te `/admin`, klienti njoftohet vetë.
+
+Konfiguro njërën rrugë te `.env`:
+
+```env
+# Resend — 3.000 email/muaj falas
+RESEND_API_KEY="re_..."
+EMAIL_FROM="Elev8 Printings <porosi@domeni-yt.al>"
+ADMIN_NOTIFY_EMAIL="ti@domeni-yt.al"
+```
+
+ose SMTP-në tënde (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`). Pa asnjërën,
+faqja punon normalisht dhe email-et vetëm shënohen te log-u — asnjë porosi nuk dështon.
+
+---
+
+## Çmimet dhe zbritjet
+
+Të gjitha te [`lib/pricing.ts`](lib/pricing.ts), në një vend të vetëm që e përdorin
+njësoj faqet dhe API-ja:
+
+| Sasia | Zbritja |
+|---|---|
+| 10+ copë | −5% |
+| 25+ copë | −10% |
+| 50+ copë | −15% |
+| 100+ copë | −20% |
+
+Transporti: 300 Lekë, falas mbi 5.000 Lekë (ndryshohen me `NEXT_PUBLIC_SHIPPING_COST`
+dhe `NEXT_PUBLIC_FREE_SHIPPING_OVER`). Çmimet e porosisë llogariten gjithmonë nga
+serveri me çmimet e databazës, kurrë me ato që dërgon browser-i.
+
+---
+
+## Blerje pa llogari
+
+Vizitori e mbush shportën pa u regjistruar — ajo ruhet te browser-i i tij dhe kalon te
+llogaria nëse më vonë hyn. Te checkout-i kërkohet vetëm email-i, ku shkon konfirmimi.
+
+---
+
+## Mbrojtja e formularëve
+
+Formularët publikë kanë validim serveri, fushë karrem kundër robotëve dhe kufi prej
+5 dërgimesh për IP çdo 10 minuta. Kufiri mbahet në memorie, ndaj me disa instanca
+paralele duhet zëvendësuar me Redis.
+
+---
+
 ## Storage i dizajneve
 
 Klientët ngarkojnë dizajne te kërkesa e ofertës dhe te faqja e produktit. Dy mundësi:
@@ -136,8 +190,14 @@ npm run lint       # ESLint
 ## Të dhënat
 
 Të gjitha të dhënat në `scripts/seed.ts` (produkte, çmime, portfolio, testimoniale) janë
-**shembuj** — zëvendësoji me të tuat përpara se ta nxjerrësh online. Fotot te `public/images/`
-janë të përfshira në repo, pa varësi nga CDN i jashtëm.
+**shembuj** — zëvendësoji me të tuat përpara se ta nxjerrësh online. Të dhënat e kontaktit
+dhe ato ligjore janë te [`lib/contact-info.ts`](lib/contact-info.ts); plotëso NIPT-in dhe
+adresën përpara se të përdorësh faqet ligjore.
+
+> **Kujdes me fotot e mockup-eve:** `public/mockups/white_tshirt.png` dhe
+> `black_hoodie.png` janë foto stoku **me watermark** (Adobe Stock, Dreamstime), të
+> trashëguara nga versioni fillestar. Zëvendësoji me foto të tuat ose me licencë
+> përpara se faqja të dalë online.
 
 Çmimet janë në Lekë (ALL) dhe konfigurohen te `scripts/seed.ts` (`basePrice`) ose direkt në DB.
 

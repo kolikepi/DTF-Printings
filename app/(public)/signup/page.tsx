@@ -12,7 +12,7 @@ import { UserPlus, Mail, Lock, User } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function SignupPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [loading, setLoading] = useState(false);
 
@@ -27,12 +27,12 @@ export default function SignupPage() {
       const res = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, email: form.email, password: form.password }),
+        body: JSON.stringify({ name: form.name, email: form.email, password: form.password, lang }),
       });
+      const data = await res.json().catch(() => ({}));
       if (res?.ok) {
         await signIn('credentials', { email: form.email, password: form.password, redirect: true, callbackUrl: '/' });
       } else {
-        const data = await res?.json();
         toast.error(data?.error ?? t('common.error'));
       }
     } catch {
